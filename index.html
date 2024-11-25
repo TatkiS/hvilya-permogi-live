@@ -1,63 +1,142 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Хвиля Перемоги LIVE</title>
+    <title>Хвиля Перемоги Dj Live</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #00c6ff, #0072ff);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
+            flex-direction: column;
         }
         .player-container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 600px;
-            margin: 20px auto;
         }
-        iframe {
+        .player-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        audio {
             width: 100%;
-            height: 250px;
+            border-radius: 10px;
+            outline: none;
+        }
+        .telegram-link {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #0072ff;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+        .telegram-link:hover {
+            background-color: #005bb5;
+        }
+        .telegram-link:active {
+            background-color: #003d80;
+        }
+        .player-buttons {
+            margin-top: 20px;
+        }
+        .player-buttons button {
+            padding: 10px 20px;
+            background-color: #0072ff;
+            color: white;
             border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
-        .footer-link {
-            display: block;
-            font-size: 0.9em;
-            margin-top: 10px;
+        .player-buttons button:hover {
+            background-color: #005bb5;
         }
-        #chat-container {
-            width: 100%;
-            max-width: 600px;
-            height: 400px;
-            margin: 20px auto;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: #fff;
-            overflow: hidden;
+        .player-buttons button:active {
+            background-color: #003d80;
+        }
+        .iframe-container, .audio-player {
+            display: none; /* Ховаємо плеєри за замовчуванням */
+        }
+
+        /* Адаптація для мобільних пристроїв */
+        @media (max-width: 768px) {
+            .player-container h1 {
+                font-size: 20px;
+            }
+            .telegram-link {
+                font-size: 16px;
+                padding: 15px;
+            }
+            iframe {
+                width: 100%;
+                height: 150px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="player-container">
-        <iframe src="https://zeno.fm/player/hvilya-permogi-live"></iframe>
-        <a href="https://zeno.fm/" target="_blank" class="footer-link">A Zeno.FM Station</a>
+        <h1>🎶 Хвиля Перемоги Dj Live 🎶</h1>
+        
+        <!-- Кнопки для вибору плеєра -->
+        <div class="player-buttons">
+            <button onclick="showAudioPlayer()">Аудіо Плеєр</button>
+            <button onclick="showIframePlayer()">Веб Плеєр</button>
+        </div>
+
+        <!-- Аудіо Плеєр -->
+        <div class="audio-player" id="audio-player">
+            <audio controls>
+                <source src="https://stream.zeno.fm/dxmsjbwstptuv" type="audio/mpeg">
+                Ваш браузер не підтримує аудіо-програвач.
+            </audio>
+        </div>
+
+        <!-- Веб Плеєр -->
+        <div class="iframe-container" id="iframe-player">
+            <iframe src="https://zeno.fm/player/hvilya-peremogi-dj-live" width="100%" height="250" frameborder="0" scrolling="no"></iframe>
+            <a href="https://zeno.fm/" target="_blank" style="display: block; font-size: 0.9em; line-height: 10px; color: #fff;">A Zeno.FM Station</a>
+        </div>
+
+        <!-- Кнопка для замовлення пісні через Telegram -->
+        <a href="https://t.me/hvilyaperemogi" class="telegram-link" target="_blank">
+            Замовити пісню або спілкування в Telegram
+        </a>
     </div>
 
-    <div id="chat-container">
-        <!-- Підключіть чат-сервіс -->
-        <script type="text/javascript">
-            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-            (function () {
-                var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-                s1.async = true;
-                s1.src = 'https://embed.tawk.to/ВАШ_ЧАТ_ID/1';
-                s1.charset = 'UTF-8';
-                s1.setAttribute('crossorigin', '*');
-                s0.parentNode.insertBefore(s1, s0);
-            })();
-        </script>
-    </div>
+    <script>
+        // Функції для перемикання плеєрів
+        function showAudioPlayer() {
+            document.getElementById('audio-player').style.display = 'block'; // Показуємо аудіо плеєр
+            document.getElementById('iframe-player').style.display = 'none'; // Ховаємо iframe плеєр
+        }
+
+        function showIframePlayer() {
+            document.getElementById('iframe-player').style.display = 'block'; // Показуємо iframe плеєр
+            document.getElementById('audio-player').style.display = 'none'; // Ховаємо аудіо плеєр
+        }
+
+        // Встановлюємо плеєр за замовчуванням
+        showAudioPlayer();
+    </script>
 </body>
 </html>
